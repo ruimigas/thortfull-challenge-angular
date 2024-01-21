@@ -1,0 +1,56 @@
+
+<div class="custom-div mt-3">
+  <h1>Star Wars Starships</h1>
+  <app-custom-bootstrap-spinner *ngIf="loading"></app-custom-bootstrap-spinner>
+  <div class="row mb-4" *ngIf="!loading">
+    <div class="col-md-4 mb-4" *ngFor="let starship of currentStarships; let index = index">
+      <div class="card" >
+        <div class="card-body ">
+          <h5 class="card-title">{{ starship.name }}</h5>
+          <p class="card-text"><b>Model</b>: {{ starship.model }}</p>
+          <p class="card-text"><b>Manufacturer</b>: {{ starship.manufacturer }}</p>
+          <button type="button" class="btn btn-primary" (click)="showModal(index)">See More</button>
+        </div></div>
+    </div>
+    <div class="col-md-12 mt-4 mb-5 d-flex justify-content-between align-items-center">
+      <button *ngIf="previousCall" (click)="loadNextOrPreviousPage('previous'); counterPage = (counterPage - 1)" class="btn btn-primary float-left">Previous Page</button>
+      <span class="text-center"><b>Current page:</b> {{counterPage}}</span>
+      <button *ngIf="nextCall" (click)="loadNextOrPreviousPage('next'); counterPage = (counterPage + 1)" class="btn btn-primary float-right">Next Page</button>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="backdrop" *ngIf="tooltipContent !== null" (click)="tooltipContent = null">
+<div class="d-block modal mt-5">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{ tooltipContent.name }}</h5>
+      </div>
+      <div class="modal-body">
+        <p><b>Model:</b> {{ tooltipContent.model }}</p>
+        <p><b>Manufacturer:</b> {{ tooltipContent.manufacturer }}</p>
+        <p><b>Cost in Credits:</b> {{ tooltipContent.cost_in_credits }}</p>
+        <p><b>Length:</b> {{ tooltipContent.length }}</p>
+        <p><b>Max Atmosphering Speed:</b> {{ tooltipContent.max_atmosphering_speed }}</p>
+        <p><b>Crew:</b> {{ tooltipContent.crew }}</p>
+        <p><b>Passengers:</b> {{ tooltipContent.passengers }}</p>
+        <p><b>Cargo Capacity:</b> {{ tooltipContent.cargo_capacity }}</p>
+        <p><b>Consumables:</b> {{ tooltipContent.consumables }}</p>
+        <p><b>Hyperdrive Rating:</b> {{ tooltipContent.hyperdrive_rating }}</p>
+        <p><b>Starship Class:</b> {{ tooltipContent.starship_class }}</p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="tooltipContent = null">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+

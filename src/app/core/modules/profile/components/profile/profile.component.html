@@ -1,0 +1,80 @@
+
+<app-custom-bootstrap-spinner class="center" *ngIf="loading"></app-custom-bootstrap-spinner>
+<div *ngIf="userProfile" class="container mt-5">
+  <div class="row">
+    <div class="col-md-4">
+      <img [src]="userProfile.picture.large" class="img-fluid rounded" alt="User Image" style="max-height: 300px;">
+    </div>
+    <div class="col-md-8">
+      <h2>{{ userProfile.name.title }} {{ userProfile.name.first }} {{ userProfile.name.last }}</h2>
+
+      <!-- Form Section -->
+      <form *ngIf="userProfileForm" [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="first" class="form-label">First Name</label>
+          <input type="text" class="form-control" id="first" formControlName="first" required>
+          <div *ngIf="userProfileForm && userProfileForm.get('first')!.hasError('required')" class="text-danger">
+            First Name is required
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="last" class="form-label">Last Name</label>
+          <input type="text" class="form-control" id="last" formControlName="last" required>
+          <div *ngIf="userProfileForm && userProfileForm.get('last')!.hasError('required')" class="text-danger">
+            Last Name is required
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="gender" class="form-label">Gender</label>
+          <input type="text" class="form-control" id="gender" formControlName="gender" required>
+          <div *ngIf=" userProfileForm && userProfileForm.get('gender')!.hasError('required')" class="text-danger">
+            Gender is required
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" formControlName="email" required>
+          <div *ngIf="userProfileForm && userProfileForm.get('email')!.hasError('required')" class="text-danger">
+            Email is required
+          </div>
+          <div *ngIf="userProfileForm && userProfileForm.get('email')!.hasError('email')" class="text-danger">
+            Invalid email format
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="phone" class="form-label">Phone</label>
+          <input type="text" class="form-control" id="phone" formControlName="phone" required>
+          <div *ngIf="userProfileForm && userProfileForm.get('phone')!.hasError('required')" class="text-danger">
+            Phone is required
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="city" class="form-label">City</label>
+          <input type="text" class="form-control" id="city" formControlName="city" required>
+          <div *ngIf="userProfileForm && userProfileForm.get('city')!.hasError('required')" class="text-danger">
+            City is required
+          </div>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary" [disabled]="this.showAlert">Update profile</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="showAlert" class="alert-container">
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Your profile was updated!</strong>
+    <br> Just a simulation
+  </div>
+</div>
+
+
+
